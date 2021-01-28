@@ -69,6 +69,12 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .attr("r", 7)
         .style("fill", "#5d05b5")
 
+    // Add labels for axes
+    // Resource: http://www.d3noob.org/2012/12/adding-axis-labels-to-d3js-graph.html
+    chartGroup.append("text")
+        .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + margin.bottom - 15})`)
+        .style("text-anchor", "middle")
+        .text("Poverty")
 
 
 } , function(error) {
