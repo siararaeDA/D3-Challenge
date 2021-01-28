@@ -25,7 +25,15 @@ var chartGroup = svg.append("g");
 
 // Read in data using D3 method
 d3.csv("assets/data/data.csv").then(function(healthData) {
-    console.log(healthData);
+    // Log data to console to test if it's read in correctly
+    //console.log(healthData);
+
+    // Cast data to variables
+    var obesity = healthData.map(data => +data.obesity);
+    var poverty = healthData.map(data => +data.poverty);
+    // console.log(obesity);
+    // console.log(poverty);
+
 
 } , function(error) {
     console.log(error);
