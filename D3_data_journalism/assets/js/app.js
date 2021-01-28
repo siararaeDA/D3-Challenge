@@ -24,7 +24,7 @@ var svg = d3.select("#scatter")
 var chartGroup = svg.append("g");
 
 // Read in data using D3 method
-d3.csv("../data/data.csv").then(function(healthData) {
+d3.csv("assets/data/data.csv").then(function(healthData) {
     console.log(healthData);
 
 } , function(error) {
