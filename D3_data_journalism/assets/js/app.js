@@ -40,11 +40,11 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     
     // Create x and y scales
     var xScale = d3.scaleLinear()
-        .domain([0, d3.max(obesity)])
+        .domain([(d3.min(poverty) - 2), (d3.max(poverty) + 2)])
         .range([0, chartWidth]);
 
     var yScale = d3.scaleLinear()
-        .domain([0, d3.max(poverty)])
+        .domain([0, (d3.max(obesity) + 2)])
         .range([chartHeight, 0]);
 
     // Create axes
@@ -64,9 +64,9 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .data(healthData)
         .enter()
         .append("circle")
-        .attr("cx", (d, i) => xScale(obesity[i]))
-        .attr("cy", (d, i) => yScale(poverty[i]))
-        .attr("r", 5)
+        .attr("cx", (d, i) => xScale(poverty[i]))
+        .attr("cy", (d, i) => yScale(obesity[i]))
+        .attr("r", 7)
         .style("fill", "#5d05b5")
 
 
