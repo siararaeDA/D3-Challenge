@@ -32,19 +32,19 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     // Cast data to variables
     var obesity = healthData.map(data => +data.obesity);
     var poverty = healthData.map(data => +data.poverty);
-    // console.log(obesity);
-    // console.log(poverty);
+    console.log(obesity);
+    console.log(poverty);
 
     // Build scatter plot
     // Using example from https://www.d3-graph-gallery.com/graph/scatter_basic.html and class examples
     
     // Create x and y scales
     var xScale = d3.scaleLinear()
-        .domain([0, d3.max(healthData, data => data.obesity)])
+        .domain([0, d3.max(obesity)])
         .range([0, chartWidth]);
 
     var yScale = d3.scaleLinear()
-        .domain([0, d3.max(healthData, data => data.poverty)])
+        .domain([0, d3.max(poverty)])
         .range([chartHeight, 0]);
 
     // Create axes
@@ -64,8 +64,8 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .data(healthData)
         .enter()
         .append("circle")
-        .attr("cx", data => xScale(data.obesity))
-        .attr("cy", data => yScale(data.poverty))
+        .attr("cx", (d, i) => xScale(obesity[i]))
+        .attr("cy", (d, i) => xScale(poverty[i]))
         .attr("r", 5)
         .style("fill", "#5d05b5")
 
