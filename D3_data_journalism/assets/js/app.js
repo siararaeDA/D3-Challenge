@@ -44,7 +44,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .range([0, chartWidth]);
 
     var yScale = d3.scaleLinear()
-        .domain([0, (d3.max(obesity) + 2)])
+        .domain([(d3.min(obesity) - 2), (d3.max(obesity) + 2)])
         .range([chartHeight, 0]);
 
     // Create axes
