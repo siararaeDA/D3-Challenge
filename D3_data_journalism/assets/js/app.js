@@ -65,7 +65,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .enter()
         .append("circle")
         .attr("cx", (d, i) => xScale(obesity[i]))
-        .attr("cy", (d, i) => xScale(poverty[i]))
+        .attr("cy", (d, i) => yScale(poverty[i]))
         .attr("r", 5)
         .style("fill", "#5d05b5")
 
