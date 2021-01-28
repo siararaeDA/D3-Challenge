@@ -21,7 +21,8 @@ var svg = d3.select("#scatter")
   .attr("height", svgHeight);
 
 // Append a group to the SVG area
-var chartGroup = svg.append("g");
+var chartGroup = svg.append("g")
+.attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Read in data using D3 method
 d3.csv("assets/data/data.csv").then(function(healthData) {
@@ -33,6 +34,19 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     var poverty = healthData.map(data => +data.poverty);
     // console.log(obesity);
     // console.log(poverty);
+
+    // Build scatter plot
+    // Using example from https://www.d3-graph-gallery.com/graph/scatter_basic.html and class examples
+    
+    // Create scales
+    var xScale = d3.scaleLinear()
+        .domain([0, d3.max(healthData, data => data.obesity)])
+        .range([0, chartWidth]);
+
+    var yScale = d3.scaleLinear()
+        .domain([0, d3.max(healthData, data => data.poverty)])
+        .range([chartHeight, 0]);
+
 
 
 } , function(error) {
