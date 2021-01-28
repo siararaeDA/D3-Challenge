@@ -59,21 +59,35 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .attr("transform", `translate(0, ${chartHeight})`)
         .call(bottomAxis);
 
-    // Draw chart
+    // Draw circles in chart
     chartGroup.selectAll("#scatter")
         .data(healthData)
         .enter()
         .append("circle")
         .attr("cx", (d, i) => xScale(poverty[i]))
         .attr("cy", (d, i) => yScale(obesity[i]))
-        .attr("r", 7)
-        .style("fill", "#5d05b5")
+        .attr("r", 10)
+        .classed("stateCircle", true)
+
+    // Add text to circles
+    chartGroup.selectAll(".stateText")
+        .data(healthData)
+        .enter()
+        .append("text")
+        .attr("x", (d, i) => xScale(poverty[i]))
+        .attr("y", (d, i) => yScale(obesity[i]) + 3)
+        .attr("font-size", "10px")
+        .attr("text-anchor", "middle")
+        .text(d => d.abbr)
+        .classed("stateText", true)
+
 
     // Add labels for axes
-    // Resource: http://www.d3noob.org/2012/12/adding-axis-labels-to-d3js-graph.html
+    // Resource: http://www.d3noob.org/2012/12/adding-axis-labels-to-d3js-graph.html & Day 3 Activity 3
     chartGroup.append("text")
         .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + margin.bottom - 15})`)
         .style("text-anchor", "middle")
+        .style("font-weight", "bold")
         .text("In Poverty (%)")
 
     chartGroup.append("text")
@@ -82,8 +96,8 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .attr("x", 0 - (chartHeight / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
+        .style("font-weight", "bold")
         .text("Obesity (%)")
-
 
 } , function(error) {
     console.log(error);
