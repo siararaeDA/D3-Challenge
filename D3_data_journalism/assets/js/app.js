@@ -60,7 +60,14 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
         .call(bottomAxis);
 
     // Draw chart
-    
+    chartGroup.selectAll("#scatter")
+        .data(healthData)
+        .enter()
+        .append("circle")
+        .attr("cx", data => xScale(data.obesity))
+        .attr("cy", data => yScale(data.poverty))
+        .attr("r", 5)
+        .style("fill", "#5d05b5")
 
 
 
