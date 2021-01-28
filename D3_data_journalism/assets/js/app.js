@@ -38,7 +38,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     // Build scatter plot
     // Using example from https://www.d3-graph-gallery.com/graph/scatter_basic.html and class examples
     
-    // Create scales
+    // Create x and y scales
     var xScale = d3.scaleLinear()
         .domain([0, d3.max(healthData, data => data.obesity)])
         .range([0, chartWidth]);
@@ -46,6 +46,21 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     var yScale = d3.scaleLinear()
         .domain([0, d3.max(healthData, data => data.poverty)])
         .range([chartHeight, 0]);
+
+    // Create axes
+    var bottomAxis = d3.axisBottom(xScale);
+    var leftAxis = d3.axisLeft(yScale);
+
+    // Append SVG elements and add axes inside of them
+    chartGroup.append("g")
+        .call(leftAxis);
+
+    chartGroup.append("g")
+        .attr("transform", `translate(0, ${chartHeight})`)
+        .call(bottomAxis);
+
+    // Draw chart
+    
 
 
 
